@@ -1,4 +1,4 @@
-# PDF Figure and Table Extraction (Graduate Design)
+# PDF Figure and Table Extraction (Graduate Design) Uncompleted!
 
 ## This project is based on project [CNOCR](https://github.com/breezedeus/cnocr) and [Keras_segmentation](https://github.com/divamgupta/image-segmentation-keras). Thanks for their excellent work!
 
@@ -22,3 +22,4 @@ If you cannot have a good connection, you can download it by yourself in repo's 
 ```
 wget -p ./models https://github.com/Alpha-Monocerotis/PDF_FigureTable_Extraction/releases/download/v1.0/resnet_segnet_1.0
 ```
+
