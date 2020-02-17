@@ -180,7 +180,7 @@ def line_segmentation(img, flag=1):
             if pixel_sum / img.shape[1] > 0.03:
                 return False
         return True
-
+        
     for i in range(img.shape[0]):
         if determine_white_line(i) and flag == 1:
             continue
