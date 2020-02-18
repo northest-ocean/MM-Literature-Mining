@@ -10,14 +10,9 @@ import datetime
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-from cnocr import CnOcr
-from keras_segmentation.predict import predict_multiple
 
-def extract_text_from_image(path):
-    """ CRNN to recognize text"""
-    ocr = CnOcr()
-    res = ocr.ocr_for_single_line(path)
-    return ''.join(res)
+from tqdm import tqdm
+from keras_segmentation.predict import predict_multiple
 
 
 # def pdf2img(pdf_path, image_path='./images'):
@@ -164,7 +159,8 @@ def show_dir_seg_result(original_dir, seg_result_dir):
         cv2.imwrite('./' + path, image)
 
 
-def line_segmentation(img, flag=1):
+def line_segmentation(img, flag=1, tag="figure"):
+    assert tag in ["figure", "table"], "Invalid tag, tag should be figure or table."
     start_row = 0
     segments = []
 
@@ -180,13 +176,19 @@ def line_segmentation(img, flag=1):
             if pixel_sum / img.shape[1] > 0.03:
                 return False
         return True
-        
-    for i in range(img.shape[0]):
+    if tag == 'figure':
+        scan_scope = range(img.shape[0])
+    else:
+        scan_scope = range(img.shape[0]-1, -1, -1)
+    for i in scan_scope:
         if determine_white_line(i) and flag == 1:
             continue
         elif determine_white_line(i) and flag == 0:
             flag = 1
-            segments.append([start_row - 1, i + 1])
+            if tag == 'figure':
+                segments.append([start_row - 1, i + 1])
+            else:
+                segments.append([i - 1, start_row + 1])
         elif not determine_white_line(i) and flag == 1:
             flag = 0
             start_row = i
@@ -235,68 +237,12 @@ def get_segmented_image():
         else:
             print("File format Error: " + path)
 
-def generate_result():
-    index = 0
-    # TODO(NikolaLiu@icloud.com): Adding function about extract each block and related image
-
-
-def text_extraction():
-    pass
-
-def image_or_table_extraction():
-    pass
-
-
-def seg_image_to_blocks1(image):
-    category = dict()
-    category[1] = 'table'
-    category[2] = 'image'
-    def isedge(x, y):
-        count_backgroud_pixel = 0
-        for i in range(-1, 2):
-            for j in range(-1 , 2):
-                if 0 <= x + i < image.shape[0] and 0 <= y + j <image.shape[1] and image[x + i][y + j][2] == 20:
-                    return True
-        return False
-    edge_x = dict()
-    edge_y = dict()
-    edge_x_set = set()
-    edge_y_set = set()
-    for i in range(image.shape[0]):
-        for j in range(image.shape[1]):
-            if image[i][j][2] != 20 and isedge(i, j):
-                if i in edge_x_set:
-                    edge_x[i] += 1
-                else:
-                    edge_x[i] = 1
-                    edge_x_set.add(i)
-
-                if i in edge_y_set:
-                    edge_y[i] += 1
-                else:
-                    edge_y[i] = 1
-                    edge_y_set.add(i)
-    return edge_x, edge_y
-
-def get_all_seg_areas(images):
-    # TODO(NikolaLiu@icloud.com): As for a segmentation result, we can scan it to get each areas.
-    pass
-
-def process_area(images, x, y):
-    # TODO(NikolaLiu@icloud.com): Scab column and row respectively, then get the split possibility. You should also consider the situation that hollows in an area could also be the sign of splitting. 
-    pass
-
 
 if __name__ == "__main__":
-    edge_x, edge_y = seg_image_to_blocks(cv2.imread('path/to/image'))
-    # print(edge_x.keys())
-    # print(edge_y.keys())
-    plt.figure()
-    plt.plot(list(edge_x.values()))
-    plt.savefig('edge_x.jpg')
-    plt.figure()
-    plt.plot(list(edge_y.values()))
-    plt.savefig('edge_y.jpg')
+    pass
+    
+
+
     
 
 
