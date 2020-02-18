@@ -24,20 +24,38 @@ wget -p ./models https://github.com/Alpha-Monocerotis/PDF_FigureTable_Extraction
 ```
 
 ## Usage
-Here we have a primary examples to show our result. The original pdf page like this[examples/Material28_images_14.jpg](examples/Material28_images_14.jpg):
-![Material28_images_14.jpg](examples/Material28_images_14.jpg)
+### Here we have a primary examples to show our result. The original pdf pages like [examples/Material28_images_66.jpg](examples/Material28_images_66.jpg) and [examples/Material28_images_111.jpg](examples/Material28_images_111.jpg):
+![Material28_images_66.jpg](examples/Material28_images_66.jpg)
+[Material28_images_66.jpg](examples/Material28_images_66.jpg)
 
-Then after extraction, we have:
+### Then after extraction, we have the following:
 ![examples/图2.35.jpg](examples/图2.35.jpg)
-
+[examples/图2.35.jpg](examples/图2.35.jpg)
 ![examples/图2.36.jpg](examples/图2.36.jpg)
-
+[examples/图2.36.jpg](examples/图2.36.jpg)
 ![examples/图2.37.jpg](examples/图2.37.jpg)
+[examples/图2.37.jpg](examples/图2.37.jpg)
 
-Our [log file](examples/log.txt) will generate the following:
+### Second page
+![Material28_images_111.jpg](examples/Material28_images_111.jpg)
+[Material28_images_111.jpg](examples/Material28_images_111.jpg)
+
+### The result shoud be:
+![examples/图4.10.jpg](examples/图4.10.jpg)
+[examples/图4.10.jpg](examples/图4.10.jpg)
+![examples/表4.2.jpg](examples/表4.2.jpg)
+[examples/表4.2.jpg](examples/表4.2.jpg)
+
+
+### Our [log file](examples/log.txt) will generate the following:
 ```plain
 图2.35三物质分解的基材料图像。第一行是针对60keV优化的结果，第二行是针对Gd优化的结果。从左到右的每一列分别是PMIMA、Al和Gd的基材料图像。所有图像显示的灰度窗为[-0.5，1.5]。 Material28/图2.35.jpg
 图2.36Gd溶液的重建浓度随光子数的变化。其中显示的是100umaol/ml的Gd的标准差，因为4个的标(准差是基本相同的。 Material28/图2.36.jpg
 图2.37NaCl溶液的重建浓度随光子数的变化。在标准差图像中1.5×10*的结果没有显示，是由于它的标准差太大，超过了40g/100ml。 Material28/图2.37.jpg
+图2.35三物质分解的基材料图像。第一行是针对60keV优化的结果，第二行是针对Gd优化的结果。从左到右的每一列分别是PMIMA、Al和Gd的基材料图像。所有图像显示的灰度窗为[-0.5，1.5]。 Material28/图2.35.jpg
+图2.36Gd溶液的重建浓度随光子数的变化。其中显示的是100umaol/ml的Gd的标准差，因为4个的标(准差是基本相同的。 Material28/图2.36.jpg
+图2.37NaCl溶液的重建浓度随光子数的变化。在标准差图像中1.5×10*的结果没有显示，是由于它的标准差太大，超过了40g/100ml。 Material28/图2.37.jpg
+图4.10金属荧光实验示意图:（a）实验系统照片;（b）实验系统示意图 Material28/图4.10.jpg
+表4.2实验所用样品 Material28/表4.2.jpg
 ```
 

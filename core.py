@@ -100,11 +100,11 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
 
         # Get all possible areas that include title
         line_segs = line_segmentation(scan_area,flag=1 ,tag=tag)
-
+        
         # If the category is table, the return sequence of areas should be reversed
-        if tag == 'table':
+        if tag == 'table' and len(line_segs) > 1:
             line_segs = line_segs.reverse()
-
+        
         # Extract text by lines, this could improve the accuracy, proved by test.
         line_seg_areas = []
         for line_seg in line_segs:
@@ -134,8 +134,8 @@ def get_all_seg_areas(image):
 
 
 if __name__ == "__main__":
-    seg_image = '/root/Projects/GraduationDesign/result0/Material28_images_66.jpg'
-    ori_image = '/root/Projects/GraduationDesign/imgs/Material28_images_66.jpg'
+    seg_image = '/root/Projects/GraduationDesign/result0/Material28_images_111.jpg'
+    ori_image = '/root/Projects/GraduationDesign/imgs/Material28_images_111.jpg'
     generate_result(seg_image, ori_image)
 
     
