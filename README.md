@@ -34,25 +34,31 @@ Then run the file and have fun!
 ## Usage
 ### Here I have some examples to show results. The original pdf pages are like [examples/Material28_images_66.jpg](examples/Material28_images_66.jpg) and [examples/Material28_images_111.jpg](examples/Material28_images_111.jpg):
 ![Material28_images_66.jpg](examples/Material28_images_66.jpg)
-* [Material28_images_66.jpg](examples/Material28_images_66.jpg)
+#### [Material28_images_66.jpg](examples/Material28_images_66.jpg)
 
 ### Then after extraction, we have the following:
+
 ![examples/图2.35.jpg](examples/图2.35.jpg)
-* [examples/图2.35.jpg](examples/图2.35.jpg)
+#### [examples/图2.35.jpg](examples/图2.35.jpg)
+
 ![examples/图2.36.jpg](examples/图2.36.jpg)
-* [examples/图2.36.jpg](examples/图2.36.jpg)
+#### [examples/图2.36.jpg](examples/图2.36.jpg)
+
 ![examples/图2.37.jpg](examples/图2.37.jpg)
-* [examples/图2.37.jpg](examples/图2.37.jpg)
+#### [examples/图2.37.jpg](examples/图2.37.jpg)
+
 
 ### Second page
+
 ![Material28_images_111.jpg](examples/Material28_images_111.jpg)
-* [Material28_images_111.jpg](examples/Material28_images_111.jpg)
+#### [Material28_images_111.jpg](examples/Material28_images_111.jpg)
 
 ### The result shoud be:
+
 ![examples/图4.10.jpg](examples/图4.10.jpg)
-* [examples/图4.10.jpg](examples/图4.10.jpg)
+#### [examples/图4.10.jpg](examples/图4.10.jpg)
 ![examples/表4.2.jpg](examples/表4.2.jpg)
-* [examples/表4.2.jpg](examples/表4.2.jpg)
+#### [examples/表4.2.jpg](examples/表4.2.jpg)
 
 
 ### Our [log file](examples/log.txt) will generate the following:
