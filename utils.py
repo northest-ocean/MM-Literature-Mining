@@ -176,10 +176,14 @@ def line_segmentation(img, flag=1, tag="figure"):
             if pixel_sum / img.shape[1] > 0.03:
                 return False
         return True
+
     if tag == 'figure':
         scan_scope = range(img.shape[0])
     else:
         scan_scope = range(img.shape[0]-1, -1, -1)
+        
+    single_line_width = -1
+    explore_range = None
     for i in scan_scope:
         if determine_white_line(i) and flag == 1:
             continue
@@ -187,13 +191,28 @@ def line_segmentation(img, flag=1, tag="figure"):
             flag = 1
             if tag == 'figure':
                 segments.append([start_row - 1, i + 1])
+                single_line_width = i - start_row
+                if single_line_width != -1:
+                    explore_range = range(i, i+single_line_width+1)
             else:
                 segments.append([i - 1, start_row + 1])
+                single_line_width = start_row - i
+                if single_line_width != -1:
+                    explore_range = range(i, i-single_line_width-1, -1)
         elif not determine_white_line(i) and flag == 1:
             flag = 0
             start_row = i
         else:
             continue
+
+        if explore_range is not None:
+            for j in explore_range:
+                if not determine_white_line(j):
+                    break
+                if j == explore_range[-1]:
+                    return segments
+            explore_range = None
+
     return segments
 
 

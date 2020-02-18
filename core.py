@@ -25,7 +25,6 @@ def extract_text_from_image(path=None):
     return text
 
 def get_all_seg_areas(image):
-    # TODO(NikolaLiu@icloud.com): As for a segmentation result, we can scan it to get each areas.\
     assert len(image.shape) == 2 or image.shape[2] == 1, "The input should be a binary image..."
 
     # directions = [(0, 1), (1, 0), (1, 1)]
@@ -65,8 +64,8 @@ def process_area(images, x, y):
 
 
 if __name__ == "__main__":
-    seg_image = cv2.imread('/root/Projects/GraduationDesign/result0/Material28_images_96.jpg')
-    ori_image = cv2.imread('/root/Projects/GraduationDesign/imgs/Material28_images_96.jpg')
+    seg_image = cv2.imread('/root/Projects/GraduationDesign/result0/Material28_images_14.jpg')
+    ori_image = cv2.imread('/root/Projects/GraduationDesign/imgs/Material28_images_14.jpg')
 
     B, G, R = cv2.split(seg_image)
     _,RedThresh = cv2.threshold(R,50,255,cv2.THRESH_BINARY)
@@ -82,8 +81,7 @@ if __name__ == "__main__":
     blocks = get_all_seg_areas(origin)[2]
     print(blocks)
     for index, block in enumerate(blocks[1:]):
-        # cv2.imwrite('./figure' + str(index) + '.png', 
-        # ori_image[block[1]:block[1]+block[3], block[0]:block[0]+block[2]])
+        
         if block[2] >= seg_image.shape[0] // 2:
             print("Single Page mode.")
         else:
@@ -102,7 +100,16 @@ if __name__ == "__main__":
             print("Figure found!")
             scan_area = ori_image[block[1]+block[3]:]
         
-        line_segs = line_segmentation(scan_area,flag=1 ,tag=tag)[0]
-        # cv2.imwrite('./lineseg.png', scan_area)
-        print(extract_text_from_image(scan_area[line_segs[0]:line_segs[1]]))
+        line_segs = line_segmentation(scan_area,flag=1 ,tag=tag)
+        if tag == 'table':
+            line_segs = line_segs.reverse()
+        # print(line_segs)
+        # seg_line_areas = []
+        
+        # for line_seg in line_segs:
+        #     seg_line_areas.append(scan_area[line_seg[0]:line_seg[1]])
+        title = extract_text_from_image(scan_area[line_segs[0][0]:line_segs[-1][1]])
+        print(title)
+        cv2.imwrite('title' + '.png', ori_image[block[1]:block[1]+block[3], block[0]:block[0]+block[2]])
+
 
