@@ -1,4 +1,4 @@
-# PDF Figure and Table Extraction (Graduate Design)
+# PDF Figure and Table Extraction (Graduation Design)
 
 ## This project is based on project [CNOCR](https://github.com/breezedeus/cnocr) and [Keras_segmentation](https://github.com/divamgupta/image-segmentation-keras). Thanks for their excellent work!
 
@@ -23,8 +23,16 @@ If you cannot have a good connection, you can download it by yourself in repo's 
 wget -p ./models https://github.com/Alpha-Monocerotis/PDF_FigureTable_Extraction/releases/download/v1.0/resnet_segnet_1.0
 ```
 
+### Using extract.py
+open extract.py and write a line of code like below:
+
+```
+extract_single_image('.examples/Material28_images_14.jpg')
+```
+Then run the file and have fun!
+
 ## Usage
-### Here I have some examples to show results. The original pdf pages like [examples/Material28_images_66.jpg](examples/Material28_images_66.jpg) and [examples/Material28_images_111.jpg](examples/Material28_images_111.jpg):
+### Here I have some examples to show results. The original pdf pages are like [examples/Material28_images_66.jpg](examples/Material28_images_66.jpg) and [examples/Material28_images_111.jpg](examples/Material28_images_111.jpg):
 ![Material28_images_66.jpg](examples/Material28_images_66.jpg)
 * [Material28_images_66.jpg](examples/Material28_images_66.jpg)
 
