@@ -25,7 +25,7 @@ wget -p ./models https://github.com/Alpha-Monocerotis/PDF_FigureTable_Extraction
 
 ## Usage
 Here we have a primary examples to show our result. The original pdf page like this[examples/Material28_images_14.jpg](examples/Material28_images_14.jpg):
-!Material28_images_14.jpg](examples/Material28_images_14.jpg)
+![Material28_images_14.jpg](examples/Material28_images_14.jpg)
 
 Then after extraction, we have:
 ![examples/图2.35.jpg](examples/图2.35.jpg)
