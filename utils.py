@@ -15,7 +15,7 @@ from tqdm import tqdm
 from keras_segmentation.predict import predict_multiple, predict
 
 
-# def pdf2img(pdf_path, image_path='./images'):
+# def pdf2img(pdf_path, image_path="./images"):
 #     """ Convert PDF pages to PNG images.
 #     Args:
 #         pdf_path: Path of PDF file
@@ -42,10 +42,10 @@ from keras_segmentation.predict import predict_multiple, predict
 
 #         pix.writePNG(
 #             image_path +
-#             '/' +
-#             pdf_path.split('.')[1].split('/')[2] +
-#             '_' +
-#             'images_%s.jpg' %
+#             "/" +
+#             pdf_path.split(".")[1].split("/")[2] +
+#             "_" +
+#             "images_%s.jpg" %
 #             pg)
 #     end_time = datetime.datetime.now()
 
@@ -65,16 +65,16 @@ def convert(input_path, output_path, target_size):
         "Length of target_size should be 2")
     file_list = os.listdir(input_path)
     for file_name in file_list:
-        in_path = input_path + '/' + file_name
+        in_path = input_path + "/" + file_name
         img = cv2.imread(in_path)
         cv2.resize(img, target_size, interpolation=cv2.INTER_AREA)
-        out_path = output_path + '/' + file_name
+        out_path = output_path + "/" + file_name
         cv2.imwrite(out_path, img)
 
 
 
 # def show_seg_result(original, seg_result):
-#     cv2.imshow('name', seg_result)
+#     cv2.imshow("name", seg_result)
 #     cv2.waitKey(0)
 
 #     for i in range(original.shape[0]):
@@ -92,7 +92,7 @@ def convert(input_path, output_path, target_size):
 #         original = cv2.imread(original_path)
 #         seg_result = cv2.imread(seg_path)
 #         image = show_seg_result(original, seg_result)
-#         cv2.imwrite('./' + path, image)
+#         cv2.imwrite("./" + path, image)
 
 
 def line_segmentation(img, flag=1, tag="figure"):
@@ -114,7 +114,7 @@ def line_segmentation(img, flag=1, tag="figure"):
         return True
 
     # The scan_scope must start with white line, if not, it should move to a white line start location.
-    if tag == 'figure':
+    if tag == "figure":
         scan_scope = range(img.shape[0])
         if not determine_white_line(0):
             for i in range(img.shape[0]):
@@ -139,9 +139,8 @@ def line_segmentation(img, flag=1, tag="figure"):
         if determine_white_line(i) and flag == 1:
             continue
         elif determine_white_line(i) and flag == 0:
-            flag = 1
-            # TODO(NikolaLiu@icloud.com): Redefine the explore_range as the blank space width between different rows 
-            if tag == 'figure':
+            flag = 1 
+            if tag == "figure":
                 segments.append([start_row - 1, i + 1])
                 single_line_width = int((i - start_row) * 1.3)
                 if single_line_width != -1:
@@ -164,23 +163,25 @@ def line_segmentation(img, flag=1, tag="figure"):
                 if j == explore_range[-1]:
                     return segments
             explore_range = None
-        if segments.__len__() > 4:
+        if single_line_width >= 20:
+            return segments
+        if segments.__len__() >= 6:
             return segments
     return segments
 
 
 def log_line_segmentation(img, segments, output_dir):
     for index, segment in enumerate(segments):
-        cv2.imwrite(output_dir + '/seg' + str(index) + '.jpg',
+        cv2.imwrite(output_dir + "/seg" + str(index) + ".jpg",
                     img[segment[0]: segment[1], :, :])
 
 
 def check_model_file():
-    model = './models/resnet_segnet_1'
-    if not os.path.isfile(model + '.0'):
+    model = "./models/resnet_segnet_1"
+    if not os.path.isfile(model + ".0"):
         try:
             # download model from github
-            os.system('wget -p ./models https://github.com/Alpha-Monocerotis/PDF_FigureTable_Extraction/releases/download/v1.0/resnet_segnet_1.0')
+            os.system("wget -p ./models https://github.com/Alpha-Monocerotis/PDF_FigureTable_Extraction/releases/download/v1.0/resnet_segnet_1.0")
         except Exception as e:
             # print(e)
             print("Download is not completed, please try again later.")
@@ -188,13 +189,13 @@ def check_model_file():
     print("Loading model from downloaded weight...")
 
 def get_single_segmentation(file_path):
-    if not os.path.isfile('./output_seg/' + file_path.split('/')[-1]):
+    if not os.path.isfile("./output_seg/" + file_path.split("/")[-1]):
         check_model_file()
         try:
             predict(
-                checkpoints_path='./models/resnet_segnet_1',
+                checkpoints_path="./models/resnet_segnet_1",
                 inp=file_path,
-                out_fname='./output_seg/' + file_path.split('/')[-1]
+                out_fname="./output_seg/" + file_path.split("/")[-1]
             )
         except Exception as e:
             print(e)
@@ -208,8 +209,8 @@ def get_segmentations(input_dir):
     try:
         predict_multiple(
             inp_dir=input_dir,
-            out_dir='./output_seg',
-            checkpoints_path='./models/resnet_segnet_1'
+            out_dir="./output_seg",
+            checkpoints_path="./models/resnet_segnet_1"
         )
         print("Segmentation Completed!")
     except Exception as e:
@@ -219,9 +220,9 @@ def get_segmentations(input_dir):
 def get_segmented_image():
     paths = os.listdir("./output_seg")
     for path in paths:
-        if 'png' in path or 'jpg' in path:
-            seg_result = cv2.imread(os.path.join('./output_seg', path))
-            original_image= cv2.imread(os.path.join('./images', path))
+        if "png" in path or "jpg" in path:
+            seg_result = cv2.imread(os.path.join("./output_seg", path))
+            original_image= cv2.imread(os.path.join("./images", path))
             assert seg_result.shape == original_image.shape, "Shape of segmentation result is not compatible with original image"
             generate_result(seg_result, original)
         else:

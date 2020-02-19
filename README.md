@@ -17,7 +17,7 @@ pip install -r requirements.txt
 
 ### Download the pretrained model (Currently only support Resnet50-Segnet)
 
-If you cannot have a good connection, you can download it by yourself in repo's release or use wget(Linux).
+If you cannot have a good connection, you can download it by yourself in repo"s release or use wget(Linux).
 
 ```
 wget -p ./models https://github.com/Alpha-Monocerotis/PDF_FigureTable_Extraction/releases/download/v1.0/resnet_segnet_1.0
@@ -27,7 +27,7 @@ wget -p ./models https://github.com/Alpha-Monocerotis/PDF_FigureTable_Extraction
 open extract.py and write a line of code like below:
 
 ```
-extract_single_image('.examples/Material28_images_14.jpg')
+extract_single_image(".examples/Material28_images_14.jpg")
 ```
 Then run the file and have fun!
 

@@ -31,11 +31,55 @@ def remove_adhesion_area(seg_image, erode_iter=10, kernel=None):
     return origin
 
 
+def reconstruct_area(line_segs, ori_image, block, tag, mode):
+    """Reconstruct text extraction area"""
+    if tag == "table":
+        split_y = block[1]
+    else:
+        split_y = block[1] + block[3]
+    if mode == "double_left":
+        base_area = ori_image[:, 0:ori_image.shape[1] // 2]
+        up_line_segs = line_segmentation(ori_image[0:split_y, 0:ori_image.shape[1] // 2], tag="table")
+        down_line_segs = line_segmentation(ori_image[split_y:, 0:ori_image.shape[1] // 2])
+    elif mode == "double_right":
+        base_area = ori_image[:, ori_image.shape[1] // 2:]
+        up_line_segs = line_segmentation(ori_image[0:split_y, ori_image.shape[1] // 2:], tag="table")
+        down_line_segs = line_segmentation(ori_image[split_y:, ori_image.shape[1] // 2:])
+    if tag == "table":
+        up_line_segs.reverse()
+    start_y = split_y
+    end_y = split_y
+    for i in range(len(up_line_segs)):
+        if len(up_line_segs[i]) != 0:
+            start_y -= up_line_segs[i][0]
+            break
+    for i in range(len(down_line_segs)-1, -1, -1):
+        if len(down_line_segs[i]) != 0:
+            end_y += down_line_segs[i][1]
+            break
+    print(split_y)
+    print(up_line_segs)
+    print(start_y, end_y)
+
+    lines = line_segmentation(base_area[start_y:end_y], tag="table")
+    lines.reverse()
+    for index, line in enumerate(lines):
+        if len(line) == 0 or line[1] - line[0] >= 25:
+            lines.pop(index)
+    # print
+    return base_area[start_y:end_y][lines[0][0]:lines[-1][-1]]
+    # cv2.imwrite('x.png', base_area[start_y:end_y][lines[0][0]:lines[-1][-1]])
+    # raise RuntimeError("xxx")
+    
+
+
+    
+
 def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
 
     # Forbidden passing image variables, only receive image path as string
     assert type(seg_image) == str and type(ori_image) == str, "seg_image and ori_image should be strings of image path."
-    file_name = seg_image.split('/')[-1].split('_')[0]
+    file_name = seg_image.split("/")[-1].split("_")[0]
     seg_image = cv2.imread(seg_image)
     ori_image = cv2.imread(ori_image)
     assert len(seg_image.shape) == 3 and seg_image.shape[2] == 3, "Channel number of Segmentation result should be 3"
@@ -68,20 +112,20 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
                         start = 3
                     if "Figure" in title[0:6]:
                         start = 6
-                    if '图' in title[0:2] or '表' in title[0:2]:
+                    if "图" in title[0:2] or "表" in title[0:2]:
                         start = 1
 
-                if title[i] not in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', ' ',']', ')'):
-                    # Normally we won't see Table1.100
+                if title[i] not in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", " ","]", ")"):
+                    # Normally we won"t see Table1.100
                     if i - start > 5:
                         i = start + 4
                     save_name = title[:i]
                     break
         if save_name is None or len(save_name) == 0:
             save_name = str(random.randint(100,1000))
-        cv2.imwrite("./results/" + file_name + '/' + save_name  + ".jpg", ori_image[block[1]:block[1]+block[3], block[0]:block[0]+block[2]])
-        with open("log.txt", 'a') as f:
-            f.writelines(title + " " + file_name + '/' + save_name + ".jpg\n")
+        cv2.imwrite("./results/" + file_name + "/" + save_name  + ".jpg", ori_image[block[1]:block[1]+block[3], block[0]:block[0]+block[2]])
+        with open("log.txt", "a") as f:
+            f.writelines(title + " " + file_name + "/" + save_name + ".jpg\n")
     
 
     # Remove adhesion area using morphology methods
@@ -136,9 +180,6 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
             else:
                 if mode == "double_left":
                     scan_area = ori_image[block[1]+block[3]:, 0:ori_image.shape[1] // 2]
-                    # print(block[1]+block[3], ori_image.shape[1] // 2)
-                    # cv2.imwrite("./test.png", scan_area)
-                    # cv2.imwrite("./test1.png", ori_image[block[1]+block[3]:, 0:ori_image.shape[1] // 2])
                 elif mode == "double_right":
                     scan_area = ori_image[block[1]+block[3]:, ori_image.shape[1] // 2:]
                 else:
@@ -149,25 +190,25 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
         # Get all possible areas that include title
         line_segs = line_segmentation(scan_area,flag=1 ,tag=tag)
 
-        
         # If the category is table, the return sequence of areas should be reversed
-        if tag == 'table':
+        if tag == "table":
             line_segs.reverse()
             
-        
         # Extract text by lines, this could improve the accuracy, proved by test.
         line_seg_areas = []
         
         if line_segs is None:
             raise RuntimeError("NO segmentation found!")
-            # if tag == 'table':
-            #     line_segs = [[-20, 0]]
-            # else:
-            #     line_segs = [[0, 20]]
         for line_seg in line_segs:
             line_seg_areas.append(scan_area[line_seg[0]:line_seg[1]])
         
-        title = extract_text_from_image(line_seg_areas, mode='C')
+        title = extract_text_from_image(line_seg_areas, mode="C")
+
+        
+        if title[0] not in "图表":
+            new_area = reconstruct_area(line_segs, ori_image, block, tag, mode)
+            title = extract_text_from_image(new_area, mode="S")
+        print(title)
         # Extract as a whole when using ocr.ocr()
         # title = extract_text_from_image(scan_area[line_segs[0][0]:line_segs[-1][1]])
         save(title, block, file_name, tag)
@@ -175,22 +216,24 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
 
 
 
-def extract_text_from_image(path=None, mode='A'):
+def extract_text_from_image(path=None, mode="C"):
     """ CRNN to recognize text"""
     ocr = CnOcr()
-    reses = ocr.ocr_for_single_lines(path)
+    if mode == "C":
+        reses = ocr.ocr_for_single_lines(path)
+    elif mode == "S":
+        reses = ocr.ocr(path)
     text = ""
     if mode == "C":
         for index, res in enumerate(reses):
-
-            if len(res) == 0 or res[0] not in ('表', '图'):
+            if len(res) == 0 or res[0] not in ("表", "图"):
                 pass
             else:
                 reses = reses[index:]
                 break
     print(reses)
     for res in reses:
-        text += "".join(res) + '\n'
+        text += "".join(res) + "\n"
     return text
 
 def get_all_seg_areas(image):
@@ -201,8 +244,8 @@ def get_all_seg_areas(image):
 
 
 if __name__ == "__main__":
-    seg_image = '/root/Projects/GraduationDesign/result0/Material1_images_3.jpg'
-    ori_image = '/root/Projects/GraduationDesign/imgs/Material1_images_3.jpg'
+    seg_image = "/root/Projects/GraduationDesign/result0/Material5_images_3.jpg"
+    ori_image = "/root/Projects/GraduationDesign/imgs/Material5_images_3.jpg"
     generate_result(seg_image, ori_image)
 
     

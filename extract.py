@@ -23,12 +23,10 @@ def extract_single_image(file_path):
     except Exception as e:
         print("Cannot load image from your file_path, please check it.")
         print(e)
-    # if image.shape != (960, 704, 3):
-    #     image =cv2.resize(image, ((704, 960, 3), interpolation=cv2.INTER_AREA))
 
     get_single_segmentation(file_path)
     gc.collect()
-    generate_result(seg_image='./output_seg/' + file_path.split('/')[-1], ori_image=file_path)
+    generate_result(seg_image="./output_seg/" + file_path.split("/")[-1], ori_image=file_path)
         
 
 def extract_from_pdf_dir(input_dir):
@@ -38,13 +36,13 @@ def extract_from_image_dir(input_dir):
     assert os.path.isdir(input_dir), "Your directory path is not valid, cannot read file from it."
     get_segmentations(input_dir)
     for path in os.listdir(input_dir):
-        if 'jpg' in path:
-            seg_image =  './output_seg/' + path
-            ori_image = input_dir + '/' + path
+        if "jpg" in path:
+            seg_image =  "./output_seg/" + path
+            ori_image = input_dir + "/" + path
             generate_result(seg_image, ori_image)
     
 
 
 if __name__ == "__main__":
-    extract_single_image('./Material5_images_2.jpg')
+    extract_single_image("./Material5_images_3.jpg")
 
