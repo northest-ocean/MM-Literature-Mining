@@ -27,7 +27,7 @@ wget -p ./models https://github.com/Alpha-Monocerotis/PDF_FigureTable_Extraction
 open extract.py and write a line of code like below:
 
 ```
-extract_single_image(".examples/Material28_images_14.jpg")
+extract_single_image("./examples/Material28_images_14.jpg")
 ```
 Then run the file and have fun!
 
