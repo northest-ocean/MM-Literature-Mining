@@ -12,7 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from tqdm import tqdm
-from keras_segmentation.predict import predict_multiple
+from keras_segmentation.predict import predict_multiple, predict
 
 
 # def pdf2img(pdf_path, image_path='./images'):
@@ -113,26 +113,42 @@ def line_segmentation(img, flag=1, tag="figure"):
                 return False
         return True
 
+    # The scan_scope must start with white line, if not, it should move to a white line start location.
     if tag == 'figure':
         scan_scope = range(img.shape[0])
+        if not determine_white_line(0):
+            for i in range(img.shape[0]):
+                if not determine_white_line(i):
+                    continue
+                else:
+                    scan_scope = range(i, img.shape[0])
+                    break
     else:
         scan_scope = range(img.shape[0]-1, -1, -1)
-        
+        if not determine_white_line(img.shape[0]-1):
+            for i in range(img.shape[0]-1, -1, -1):
+                if not determine_white_line(i):
+                    continue
+                else:
+                    scan_scope = range(i, -1, -1)
+                    break
     single_line_width = -1
     explore_range = None
+    
     for i in scan_scope:
         if determine_white_line(i) and flag == 1:
             continue
         elif determine_white_line(i) and flag == 0:
             flag = 1
+            # TODO(NikolaLiu@icloud.com): Redefine the explore_range as the blank space width between different rows 
             if tag == 'figure':
                 segments.append([start_row - 1, i + 1])
-                single_line_width = i - start_row
+                single_line_width = int((i - start_row) * 1.3)
                 if single_line_width != -1:
                     explore_range = range(i, i+single_line_width+1)
             else:
                 segments.append([i - 1, start_row + 1])
-                single_line_width = start_row - i
+                single_line_width = int((start_row - i) * 1.3)
                 if single_line_width != -1:
                     explore_range = range(i, i-single_line_width-1, -1)
         elif not determine_white_line(i) and flag == 1:
@@ -148,7 +164,8 @@ def line_segmentation(img, flag=1, tag="figure"):
                 if j == explore_range[-1]:
                     return segments
             explore_range = None
-
+        if segments.__len__() > 4:
+            return segments
     return segments
 
 
@@ -171,16 +188,19 @@ def check_model_file():
     print("Loading model from downloaded weight...")
 
 def get_single_segmentation(file_path):
-    check_model_file()
-    try:
-        predict(
-            checkpoints_path='./models/resnet_segnet_1',
-            inp=file_path,
-            out_fname='./output_seg/' + file_path.split('/')[-1]
-        )
-    except Exception as e:
-        print(e)
-        raise RuntimeError("Cannot finish segmentation.")
+    if not os.path.isfile('./output_seg/' + file_path.split('/')[-1]):
+        check_model_file()
+        try:
+            predict(
+                checkpoints_path='./models/resnet_segnet_1',
+                inp=file_path,
+                out_fname='./output_seg/' + file_path.split('/')[-1]
+            )
+        except Exception as e:
+            print(e)
+            raise RuntimeError("Cannot finish segmentation.")
+    else:
+        print("Using last segmentation result.")
 
 
 def get_segmentations(input_dir):

@@ -4,11 +4,12 @@
 # Filename	: extract.py
 # Tool		: Visual Studio Code
 
-from core import generate_result
-from keras_segmentation.predict import predict, predict_multiple
-from utils import get_single_segmentation, get_segmentations
 import os
 import cv2
+import gc
+from core import generate_result
+from keras_segmentation.predict import predict
+from utils import get_single_segmentation, get_segmentations
 
 
 def extract_from_pdf(file_path):
@@ -26,6 +27,7 @@ def extract_single_image(file_path):
     #     image =cv2.resize(image, ((704, 960, 3), interpolation=cv2.INTER_AREA))
 
     get_single_segmentation(file_path)
+    gc.collect()
     generate_result(seg_image='./output_seg/' + file_path.split('/')[-1], ori_image=file_path)
         
 
@@ -44,5 +46,5 @@ def extract_from_image_dir(input_dir):
 
 
 if __name__ == "__main__":
-    extract_single_image('/root/Projects/GraduationDesign/imgs/Material28_images_14.jpg')
+    extract_single_image('./Material5_images_2.jpg')
 
