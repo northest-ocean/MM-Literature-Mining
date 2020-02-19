@@ -25,7 +25,6 @@ def extract_single_image(file_path):
         print(e)
 
     get_single_segmentation(file_path)
-    gc.collect()
     generate_result(seg_image="./output_seg/" + file_path.split("/")[-1], ori_image=file_path)
         
 

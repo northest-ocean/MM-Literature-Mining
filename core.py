@@ -12,7 +12,6 @@ from cnocr import CnOcr
 import random
 
 
-
 def remove_adhesion_area(seg_image, erode_iter=10, kernel=None):
     """ Remove adhension areas with erode and dialate method, if the adhesion area, the  erode_iter should be set higher to seperate different areas. You can also custom a kernel, which can be more effective.
     """
@@ -57,9 +56,9 @@ def reconstruct_area(line_segs, ori_image, block, tag, mode):
         if len(down_line_segs[i]) != 0:
             end_y += down_line_segs[i][1]
             break
-    print(split_y)
-    print(up_line_segs)
-    print(start_y, end_y)
+    # print(split_y)
+    # print(up_line_segs)
+    # print(start_y, end_y)
 
     lines = line_segmentation(base_area[start_y:end_y], tag="table")
     lines.reverse()
@@ -68,12 +67,19 @@ def reconstruct_area(line_segs, ori_image, block, tag, mode):
             lines.pop(index)
     # print
     return base_area[start_y:end_y][lines[0][0]:lines[-1][-1]]
-    # cv2.imwrite('x.png', base_area[start_y:end_y][lines[0][0]:lines[-1][-1]])
-    # raise RuntimeError("xxx")
-    
 
 
-    
+def check_required_folder_file():
+    # Check required folders and files
+    try:
+        if not os.path.isdir("./results"):
+            os.system("mkdir results")
+        if not os.path.isdir("./results/" + file_name):
+            os.system("mkdir results/" + file_name)
+        if not os.path.isfile("./log.txt"):
+            os.system("touch log.txt")
+    except Exception as e:
+        raise RuntimeError("Cannot secure required folder and file.")
 
 def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
 
@@ -86,18 +92,9 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
 
     def save(title=None, block=None, file_name=None, tag=None):
         """save detected area and save log"""
-
-        # Check required folders and files
-        if not os.path.isdir("./results"):
-            os.system("mkdir results")
-        if not os.path.isdir("./results/" + file_name):
-            os.system("mkdir results/" + file_name)
-        if not os.path.isfile("./log.txt"):
-            os.system("touch log.txt")
-
         # Tag should be determined, otherwise the model may not work properly.
         assert tag is not None, "Tag cannot be None, please check your data or issue on GitHub."
-        save_name = "unkonwn"
+        save_name = ""
         if title is None:
             title = "This " + tag + " cannot find subscript."
         else:
@@ -111,10 +108,11 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
                         i = 3
                         start = 3
                     if "Figure" in title[0:6]:
+                        i = 6
                         start = 6
                     if "图" in title[0:2] or "表" in title[0:2]:
+                        i = 1
                         start = 1
-
                 if title[i] not in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", " ","]", ")"):
                     # Normally we won"t see Table1.100
                     if i - start > 5:
@@ -158,7 +156,6 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
 
             # print("Cannot define Page mode, default mode is single page mode.")
         
-
         tag = ""
         if abs(seg_image[center_point[0]][center_point[1]][0] - 156) <= 3:
             tag = "table"
@@ -202,15 +199,12 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
         for line_seg in line_segs:
             line_seg_areas.append(scan_area[line_seg[0]:line_seg[1]])
         
-        title = extract_text_from_image(line_seg_areas, mode="C")
+        title = extract_text_from_image(scan_area[line_segs[0][0]:line_segs[-1][-1]], mode="S")
 
-        
         if title[0] not in "图表":
             new_area = reconstruct_area(line_segs, ori_image, block, tag, mode)
             title = extract_text_from_image(new_area, mode="S")
         print(title)
-        # Extract as a whole when using ocr.ocr()
-        # title = extract_text_from_image(scan_area[line_segs[0][0]:line_segs[-1][1]])
         save(title, block, file_name, tag)
         
 

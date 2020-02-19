@@ -73,3 +73,12 @@ Then run the file and have fun!
 表4.2实验所用样品 Material28/表4.2.jpg
 ```
 
+
+## Future Work
+
+* [x] Single page mode
+* [x] Double page mode
+* [x] Double page mode subscript extraction optimization
+* [x] Bugfixes
+* [ ] NLP Global Context Analysis
+
