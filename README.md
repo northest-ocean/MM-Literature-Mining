@@ -1,6 +1,6 @@
 # PDF Figure and Table Extraction (Graduation Design)
 
-## This project is based on project [CNOCR](https://github.com/breezedeus/cnocr) and [Keras_segmentation](https://github.com/divamgupta/image-segmentation-keras). Thanks for their excellent work!
+## This project aims to extract figures and tables from PDF files, it will also find the coressponding subscript. The next step should be finding the description over the global context.
 
 ## Fundamentals
 1. Using ResNet50_Segnet to detect Image and Table area in a PDF file, especially for scientific papers
@@ -81,4 +81,8 @@ Then run the file and have fun!
 * [x] Double page mode subscript extraction optimization
 * [x] Bugfixes
 * [ ] NLP Global Context Analysis
+
+## Reference
+* https://github.com/divamgupta/image-segmentation-keras
+* https://github.com/breezedeus/cnocr
 
