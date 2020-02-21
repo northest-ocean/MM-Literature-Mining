@@ -50,26 +50,26 @@ def pdf2img(pdf_path, image_path="./images"):
     end_time = datetime.datetime.now()
 
 
-# def convert(input_path, output_path, target_size):
-#     """ Convert images to a scaled size(target_size).
-#     Args:
-#         input_path: Path of input image
-#         output_path: Path of resize image
-#         target_size: Size of target imag
+def convert(input_path, output_path, target_size):
+    """ Convert images to a scaled size(target_size).
+    Args:
+        input_path: Path of input image
+        output_path: Path of resize image
+        target_size: Size of target imag
 
-#     Returns:
-#         None
+    Returns:
+        None
 
-#     """
-#     assert len(target_size) == 2, TypeError(
-#         "Length of target_size should be 2")
-#     file_list = os.listdir(input_path)
-#     for file_name in file_list:
-#         in_path = input_path + "/" + file_name
-#         img = cv2.imread(in_path)
-#         cv2.resize(img, target_size, interpolation=cv2.INTER_AREA)
-#         out_path = output_path + "/" + file_name
-#         cv2.imwrite(out_path, img)
+    """
+    assert len(target_size) == 2, TypeError(
+        "Length of target_size should be 2")
+    file_list = os.listdir(input_path)
+    for file_name in file_list:
+        in_path = input_path + "/" + file_name
+        img = cv2.imread(in_path)
+        cv2.resize(img, target_size, interpolation=cv2.INTER_AREA)
+        out_path = output_path + "/" + file_name
+        cv2.imwrite(out_path, img)
 
 
 
@@ -142,12 +142,12 @@ def line_segmentation(img, flag=1, tag="figure"):
             flag = 1 
             if tag == "figure":
                 segments.append([start_row - 1, i + 1])
-                single_line_width = int((i - start_row) * 1.3)
+                single_line_width = int((i - start_row) * 1.5)
                 if single_line_width != -1:
                     explore_range = range(i, i+single_line_width+1)
             else:
                 segments.append([i - 1, start_row + 1])
-                single_line_width = int((start_row - i) * 1.3)
+                single_line_width = int((start_row - i) * 1.5)
                 if single_line_width != -1:
                     explore_range = range(i, i-single_line_width-1, -1)
         elif not determine_white_line(i) and flag == 1:
@@ -163,7 +163,7 @@ def line_segmentation(img, flag=1, tag="figure"):
                 if j == explore_range[-1]:
                     return segments
             explore_range = None
-        if single_line_width >= 20:
+        if single_line_width >= 30:
             return segments
         if segments.__len__() >= 6:
             return segments

@@ -32,6 +32,7 @@ def remove_adhesion_area(seg_image, erode_iter=10, kernel=None):
 
 def reconstruct_area(line_segs, ori_image, block, tag, mode):
     """Reconstruct text extraction area"""
+    # WARNING Potential Bug need fixed
     if tag == "table":
         split_y = block[1]
     else:
@@ -69,15 +70,18 @@ def reconstruct_area(line_segs, ori_image, block, tag, mode):
     return base_area[start_y:end_y][lines[0][0]:lines[-1][-1]]
 
 
-def check_required_folder_file():
+def check_required_folder_file(file_name):
     # Check required folders and files
     try:
         if not os.path.isdir("./results"):
             os.system("mkdir results")
+            print("Building directory: results")
         if not os.path.isdir("./results/" + file_name):
             os.system("mkdir results/" + file_name)
+            print("Building directory: " + file_name)
         if not os.path.isfile("./log.txt"):
             os.system("touch log.txt")
+            print("Building log: log.txt")
     except Exception as e:
         raise RuntimeError("Cannot secure required folder and file.")
 
@@ -92,6 +96,7 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
 
     def save(title=None, block=None, file_name=None, tag=None):
         """save detected area and save log"""
+        check_required_folder_file(file_name)
         # Tag should be determined, otherwise the model may not work properly.
         assert tag is not None, "Tag cannot be None, please check your data or issue on GitHub."
         save_name = ""
@@ -202,9 +207,9 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
         title = extract_text_from_image(scan_area[line_segs[0][0]:line_segs[-1][-1]], mode="S")
 
         if title[0] not in "图表":
+            print("\033[1;31mFirst Dection Failed! Reconstruting the detection area...\033[0m")
             new_area = reconstruct_area(line_segs, ori_image, block, tag, mode)
             title = extract_text_from_image(new_area, mode="S")
-        print(title)
         save(title, block, file_name, tag)
         
 
@@ -238,8 +243,8 @@ def get_all_seg_areas(image):
 
 
 if __name__ == "__main__":
-    seg_image = "/root/Projects/GraduationDesign/result0/Material5_images_3.jpg"
-    ori_image = "/root/Projects/GraduationDesign/imgs/Material5_images_3.jpg"
+    seg_image = "/root/Projects/GraduationDesign/result0/Material28_images_66.jpg"
+    ori_image = "/root/Projects/GraduationDesign/imgs/Material28_images_66.jpg"
     generate_result(seg_image, ori_image)
 
     
