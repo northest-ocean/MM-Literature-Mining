@@ -43,5 +43,5 @@ def extract_from_image_dir(input_dir):
 
 
 if __name__ == "__main__":
-    extract_single_image("./Material5_images_3.jpg")
+    extract_single_image("./examples/Material4_images_3.jpg")
 

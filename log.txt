@@ -42,3 +42,122 @@
 图2.37NaCl溶液的重建浓度随光子数的变化。在标准差图像中1.5×10*的结果
 没有显示，是由于它的标准差太大，超过了40g/100ml。
  Material28/图2.37.jpg
+ Material1/223.jpg
+图7屈服轨迹和相关试验的关系
+Fig.7Relationshiphctwenyieldtrajectoryand
+relevantests
+ Material1/图7.jpg
+图6AA6016铝合金单向拉伸应力应变曲线
+Fig.6AA6016aluminumallystresstrain
+curvesofuniaxialtension
+ Material1/图6.jpg
+图8塑性功原理
+Fig.8Plasticworkprinciple
+ Material1/图8.jpg
+表1所示。
+表1AA6016铝合金各向异性系数
+TablelAnisotropycoeficientofAA6016
+alumniniumlalloy
+ Material1/表1.jpg
+图7屈服轨迹和相关试验的关系
+Fig.7Relationshiphctwenyieldtrajectoryand
+relevantests
+ Material1/图7.jpg
+图6AA6016铝合金单向拉伸应力应变曲线
+Fig.6AA6016aluminumallystresstrain
+curvesofuniaxialtension
+ Material1/图6.jpg
+图8塑性功原理
+Fig.8Plasticworkprinciple
+ Material1/图8.jpg
+图7合金在3.5%NaCl溶液中浸泡(a)12h和(b}72h后的SEM图及
+（c}点1处、（d)点2处、（e)点3处、（1]点4处的能谱分析
+Fig7TypicalSEMimagsadcorrspondngEDSanalysesatrcorodng
+in3.5%NaClfrdiferunltimes((al2h;（b}72h;（c}EDSanlysis
+orpointl;(d)EDsanalyssofpoint2;（e}EDsaalysisofpoint3;（1
+EDOSanalysisofrpoint.4
+ Material5/图7.jpg
+图6d衍射斑点中出现的十字星芒，,可以判断此析出相为亚
+稳强化相。β"相主要沿(001)〉,方向析出t"”,从TEM图中能
+ Material5/图6.jpg
+表<space>2试验工艺及参数
+Table2Experimentalprocessesandparameters
+ Material2/表.jpg
+表1﹒AI-MgSi-Zr铝合金铸锭的化学成分(质量分数,%)
+TablelChemicalcompositionoftheAlHMggiZraluminum
+alloyingot(.massfraction，)
+ Material2/表1.jpg
+表<space>2试验工艺及参数
+Table2Experimentalprocessesandparameters
+ Material2/表.jpg
+表1﹒AI-MgSi-Zr铝合金铸锭的化学成分(质量分数,%)
+TablelChemicalcompositionoftheAlHMggiZraluminum
+alloyingot(.massfraction，)
+ Material2/表1.jpg
+图7合金在3.5%NaCl溶液中浸泡(a)12h和(b}72h后的SEM图及
+（c}点1处、（d)点2处、（e)点3处、（1]点4处的能谱分析
+Fig7TypicalSEMimagsadcorrspondngEDSanalysesatrcorodng
+in3.5%NaClfrdiferunltimes((al2h;（b}72h;（c}EDSanlysis
+orpointl;(d)EDsanalyssofpoint2;（e}EDsaalysisofpoint3;（1
+EDOSanalysisofrpoint.4
+ Material5/图7.jpg
+图6d衍射斑点中出现的十字星芒，,可以判断此析出相为亚
+稳强化相。β"相主要沿(001)〉,方向析出t"”,从TEM图中能
+ Material5/图6.jpg
+表<space>2试验工艺及参数
+Table2Experimentalprocessesandparameters
+ Material2/表.jpg
+表1﹒AI-MgSi-Zr铝合金铸锭的化学成分(质量分数,%)
+TablelChemicalcompositionoftheAlHMggiZraluminum
+alloyingot(.massfraction，)
+ Material2/表1.jpg
+表<space>2试验工艺及参数
+Table2Experimentalprocessesandparameters
+ Material2/表.jpg
+表1﹒AI-MgSi-Zr铝合金铸锭的化学成分(质量分数,%)
+TablelChemicalcompositionoftheAlHMggiZraluminum
+alloyingot(.massfraction，)
+ Material2/表1.jpg
+图1不同变形量下.AI-Mg-SiZr铝合金的硬度值与退火温度、退火时间之间的关系曲线
+（a}退火时间为Ih;（b}退火温度为200℃;（c}退火温度为400℃
+Fig.1RelationshipcuvesbetwenhardenessoftheAlMgSiZrallyandannealingtemperatureandtime
+（a}annealedforlh;(h}annealedat200℃;（c}anrnecaled_at400℃
+ Material2/图1.jpg
+表<space>2试验工艺及参数
+Table2Experimentalprocessesandparameters
+ Material2/表.jpg
+表1﹒AI-MgSi-Zr铝合金铸锭的化学成分(质量分数,%)
+TablelChemicalcompositionoftheAlHMggiZraluminum
+alloyingot(.massfraction，)
+ Material2/表1.jpg
+图1不同变形量下.AI-Mg-SiZr铝合金的硬度值与退火温度、退火时间之间的关系曲线
+（a}退火时间为Ih;（b}退火温度为200℃;（c}退火温度为400℃
+Fig.1RelationshipcuvesbetwenhardenessoftheAlMgSiZrallyandannealingtemperatureandtime
+（a}annealedforlh;(h}annealedat200℃;（c}anrnecaled_at400℃
+ Material2/图1.jpg
+表 2试验工艺及参数
+Table2Experimentalprocessesandparameters
+ Material2/表 2.jpg
+表1﹒AI-MgSi-Zr铝合金铸锭的化学成分(质量分数,%)
+TablelChemicalcompositionoftheAlHMggiZraluminum
+alloyingot(.massfraction，)
+ Material2/表1.jpg
+图1不同变形量下.AI-Mg-SiZr铝合金的硬度值与退火温度、退火时间之间的关系曲线
+（a}退火时间为Ih;（b}退火温度为200℃;（c}退火温度为400℃
+Fig.1RelationshipcuvesbetwenhardenessoftheAlMgSiZrallyandannealingtemperatureandtime
+（a}annealedforlh;(h}annealedat200℃;（c}anrnecaled_at400℃
+ Material2/图1.jpg
+图44种合金的晶粒尺寸
+Fig.4Grainsizeofthefouralloys
+ Material4/图44.jpg
+图44种合金的晶粒尺寸
+Fig.4Grainsizeofthefouralloys
+ Material4/图44.jpg
+表2图3(a)、3(c)MGY和IMZ11合金中各点能谱分析
+结果(原子分数,%)
+Table2Energyspectrumanalysisofeachpoint
+inFig3(a)and3(c)oftheMGYandMzllalloys（at%)
+ Material4/表2.jpg
+图54种合金的力学性能（a)拉伸性能;（hb)布氏硬度
+Fig.5Mechamicalpropertiesofthefouralloys（a}tensileproperies;（b}Brinellhardness
+ Material4/图54.jpg

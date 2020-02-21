@@ -45,8 +45,13 @@ def reconstruct_area(line_segs, ori_image, block, tag, mode):
         base_area = ori_image[:, ori_image.shape[1] // 2:]
         up_line_segs = line_segmentation(ori_image[0:split_y, ori_image.shape[1] // 2:], tag="table")
         down_line_segs = line_segmentation(ori_image[split_y:, ori_image.shape[1] // 2:])
+    elif mode == "single":
+        base_area = ori_image[:, :]
+        up_line_segs = line_segmentation(ori_image[0:split_y,:], tag="table")
+        down_line_segs = line_segmentation(ori_image[split_y:,:])
     if tag == "table":
         up_line_segs.reverse()
+    print(mode)
     start_y = split_y
     end_y = split_y
     for i in range(len(up_line_segs)):
@@ -118,6 +123,7 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
                     if "图" in title[0:2] or "表" in title[0:2]:
                         i = 1
                         start = 1
+                title = title.replace("<space>", " ")
                 if title[i] not in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", " ","]", ")"):
                     # Normally we won"t see Table1.100
                     if i - start > 5:
@@ -205,7 +211,6 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
             line_seg_areas.append(scan_area[line_seg[0]:line_seg[1]])
         
         title = extract_text_from_image(scan_area[line_segs[0][0]:line_segs[-1][-1]], mode="S")
-
         if title[0] not in "图表":
             print("\033[1;31mFirst Dection Failed! Reconstruting the detection area...\033[0m")
             new_area = reconstruct_area(line_segs, ori_image, block, tag, mode)
@@ -223,13 +228,12 @@ def extract_text_from_image(path=None, mode="C"):
     elif mode == "S":
         reses = ocr.ocr(path)
     text = ""
-    if mode == "C":
-        for index, res in enumerate(reses):
-            if len(res) == 0 or res[0] not in ("表", "图"):
-                pass
-            else:
-                reses = reses[index:]
-                break
+    for index, res in enumerate(reses):
+        if len(res) == 0 or res[0] not in ("表", "图"):
+            pass
+        else:
+            reses = reses[index:]
+            break
     print(reses)
     for res in reses:
         text += "".join(res) + "\n"
@@ -243,8 +247,8 @@ def get_all_seg_areas(image):
 
 
 if __name__ == "__main__":
-    seg_image = "/root/Projects/GraduationDesign/result0/Material28_images_66.jpg"
-    ori_image = "/root/Projects/GraduationDesign/imgs/Material28_images_66.jpg"
+    seg_image = "/root/Projects/GraduationDesign/result0/Material5_images_3.jpg"
+    ori_image = "/root/Projects/GraduationDesign/imgs/Material5_images_3.jpg"
     generate_result(seg_image, ori_image)
 
     

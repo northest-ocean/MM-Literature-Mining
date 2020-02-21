@@ -1,5 +1,3 @@
 venv
 .vscode
 *.0
-results/*
-log.txt
