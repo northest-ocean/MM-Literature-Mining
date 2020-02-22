@@ -12,69 +12,6 @@ from cnocr import CnOcr
 import random
 
 
-def remove_adhesion_area(seg_image, erode_iter=10, kernel=None):
-    """ Remove adhension areas with erode and dialate method, if the adhesion area, the  erode_iter should be set higher to seperate different areas. You can also custom a kernel, which can be more effective.
-    """
-    B, G, R = cv2.split(seg_image)
-    # Here we only determine background or block, blocks include tables and figures
-    _,RedThresh = cv2.threshold(R,50,255,cv2.THRESH_BINARY)
-    
-    if kernel is None:
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(5, 5))
-    eroded = cv2.erode(RedThresh,kernel)
-    for i in range(erode_iter):
-        eroded = cv2.erode(eroded,kernel)
-    origin = cv2.dilate(eroded,kernel)
-    for i in range(erode_iter):
-        origin = cv2.dilate(origin,kernel)
-    return origin
-
-
-def reconstruct_area(line_segs, ori_image, block, tag, mode):
-    """Reconstruct text extraction area"""
-    # WARNING Potential Bug need fixed
-    if tag == "table":
-        split_y = block[1]
-    else:
-        split_y = block[1] + block[3]
-    if mode == "double_left":
-        base_area = ori_image[:, 0:ori_image.shape[1] // 2]
-        up_line_segs = line_segmentation(ori_image[0:split_y, 0:ori_image.shape[1] // 2], tag="table")
-        down_line_segs = line_segmentation(ori_image[split_y:, 0:ori_image.shape[1] // 2])
-    elif mode == "double_right":
-        base_area = ori_image[:, ori_image.shape[1] // 2:]
-        up_line_segs = line_segmentation(ori_image[0:split_y, ori_image.shape[1] // 2:], tag="table")
-        down_line_segs = line_segmentation(ori_image[split_y:, ori_image.shape[1] // 2:])
-    elif mode == "single":
-        base_area = ori_image[:, :]
-        up_line_segs = line_segmentation(ori_image[0:split_y,:], tag="table")
-        down_line_segs = line_segmentation(ori_image[split_y:,:])
-    if tag == "table":
-        up_line_segs.reverse()
-    print(mode)
-    start_y = split_y
-    end_y = split_y
-    for i in range(len(up_line_segs)):
-        if len(up_line_segs[i]) != 0:
-            start_y -= up_line_segs[i][0]
-            break
-    for i in range(len(down_line_segs)-1, -1, -1):
-        if len(down_line_segs[i]) != 0:
-            end_y += down_line_segs[i][1]
-            break
-    # print(split_y)
-    # print(up_line_segs)
-    # print(start_y, end_y)
-
-    lines = line_segmentation(base_area[start_y:end_y], tag="table")
-    lines.reverse()
-    for index, line in enumerate(lines):
-        if len(line) == 0 or line[1] - line[0] >= 25:
-            lines.pop(index)
-    # print
-    return base_area[start_y:end_y][lines[0][0]:lines[-1][-1]]
-
-
 def check_required_folder_file(file_name):
     # Check required folders and files
     try:
@@ -137,8 +74,10 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
             f.writelines(title + " " + file_name + "/" + save_name + ".jpg\n")
     
 
-    # Remove adhesion area using morphology methods
-    seg_image_binary = remove_adhesion_area(seg_image, erode_iter, kernel)
+    # Binary for blocks detection
+    B, G, R = cv2.split(seg_image)
+    _,RedThresh = cv2.threshold(R,50,255,cv2.THRESH_BINARY)
+    seg_image_binary = RedThresh
 
     # Getting all blocks in binary segmentation image
     blocks = get_all_seg_areas(seg_image_binary)[2]
@@ -209,12 +148,10 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
             raise RuntimeError("NO segmentation found!")
         for line_seg in line_segs:
             line_seg_areas.append(scan_area[line_seg[0]:line_seg[1]])
-        
+        cv2.imwrite('x.png', scan_area[line_segs[0][0]:line_segs[-1][-1]])
         title = extract_text_from_image(scan_area[line_segs[0][0]:line_segs[-1][-1]], mode="S")
         if title[0] not in "图表":
-            print("\033[1;31mFirst Dection Failed! Reconstruting the detection area...\033[0m")
-            new_area = reconstruct_area(line_segs, ori_image, block, tag, mode)
-            title = extract_text_from_image(new_area, mode="S")
+            title = "图表unknown"
         save(title, block, file_name, tag)
         
 

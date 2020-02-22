@@ -142,12 +142,12 @@ def line_segmentation(img, flag=1, tag="figure"):
             flag = 1 
             if tag == "figure":
                 segments.append([start_row - 1, i + 1])
-                single_line_width = int((i - start_row) * 1.5)
+                single_line_width = int((i - start_row) * 1.2)
                 if single_line_width != -1:
                     explore_range = range(i, i+single_line_width+1)
             else:
                 segments.append([i - 1, start_row + 1])
-                single_line_width = int((start_row - i) * 1.5)
+                single_line_width = int((start_row - i) * 1.2)
                 if single_line_width != -1:
                     explore_range = range(i, i-single_line_width-1, -1)
         elif not determine_white_line(i) and flag == 1:
@@ -163,7 +163,7 @@ def line_segmentation(img, flag=1, tag="figure"):
                 if j == explore_range[-1]:
                     return segments
             explore_range = None
-        if single_line_width >= 30:
+        if single_line_width >= 25:
             return segments
         if segments.__len__() >= 6:
             return segments
