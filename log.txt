@@ -213,3 +213,119 @@ EDOSanalysisofrpoint.4
 Fig.6BrightfieldTEMimagesofthreloysinviewingdirectiono
 (001〉,:(a}aloyl;（b)alloy2;(c}alloy5;(d)SADP
  Material5/图6.jpg
+图5-1安捷伦Nano.IndenterG200型原位纳米压痕仪
+Fig.5-1AgilentNanoIndenterG200In-situNanoindenter
+5.1.2实验试样的制备及实验方案
+本次实验试样为中诺新材公司成产的纯铜和纯钨，其主要,成分如表5-2所示。由于
+商业化的Olive-Pharr分析法中压头的压入深度是基于压头与压入点所在水平面的相对位
+移来定义的，试件表面平整度以及粗糙度与对实验结果的准确性影响较大，在进行实验之
+ Material31/图5.jpg
+表5-2试样主要成分及含量
+Tab.5-2MainComponentsandContentoftheSample
+ Material31/表5.jpg
+图5-1安捷伦Nano.IndenterG200型原位纳米压痕仪
+Fig.5-1AgilentNanoIndenterG200In-situNanoindenter
+5.1.2实验试样的制备及实验方案
+本次实验试样为中诺新材公司成产的纯铜和纯钨，其主要,成分如表5-2所示。由于
+商业化的Olive-Pharr分析法中压头的压入深度是基于压头与压入点所在水平面的相对位
+移来定义的，试件表面平整度以及粗糙度与对实验结果的准确性影响较大，在进行实验之
+ Material31/图5.jpg
+表5-2试样主要成分及含量
+Tab.5-2MainComponentsandContentoftheSample
+ Material31/表5.jpg
+图5-1安捷伦Nano.IndenterG200型原位纳米压痕仪
+Fig.5-1AgilentNanoIndenterG200In-situNanoindenter
+5.1.2实验试样的制备及实验方案
+ Material31/图5.jpg
+表5-2试样主要成分及含量
+Tab.5-2MainComponentsandContentoftheSample
+ Material31/表5.jpg
+图5-1安捷伦Nano.IndenterG200型原位纳米压痕仪
+Fig.5-1AgilentNanoIndenterG200In-situNanoindenter
+ Material31/图5.jpg
+ Material31/223.jpg
+图5-1安捷伦Nano.IndenterG200型原位纳米压痕仪
+Fig.5-1AgilentNanoIndenterG200In-situNanoindenter
+5.1.2实验试样的制备及实验方案
+ Material31/图5.jpg
+表5-2试样主要成分及含量
+Tab.5-2MainComponentsandContentoftheSample
+ Material31/表5.jpg
+图5-1安捷伦Nano.IndenterG200型原位纳米压痕仪
+Fig.5-1AgilentNanoIndenterG200In-situNanoindenter
+ Material31/图5.jpg
+ Material31/223.jpg
+图5-1安捷伦Nano.IndenterG200型原位纳米压痕仪
+Fig.5-1AgilentNanoIndenterG200In-situNanoindenter
+5.1.2实验试样的制备及实验方案
+本次实验试样为中诺新材公司成产的纯铜和纯钨，其主要,成分如表5-2所示。由于
+商业化的Olive-Pharr分析法中压头的压入深度是基于压头与压入点所在水平面的相对位
+移来定义的，试件表面平整度以及粗糙度与对实验结果的准确性影响较大，在进行实验之
+ Material31/图5.jpg
+表5-2试样主要成分及含量
+Tab.5-2MainComponentsandContentoftheSample
+ Material31/表5.jpg
+图5-10纯铜材料参数识别过程
+Fig.5-10CopperMaterialParameter.IdentificationProcess
+ Material31/图5.jpg
+ Material31/223.jpg
+图5-11实验和反演分析获得的载荷位移—曲线图5-12实验和反演获得的压痕轮廓
+Fig.5-11LoadDisplacementVersusCurveObtainedfromFig.5-12IndentationProfileObtainedfrom
+ExperimentalandInversionAnalysisExperimentsandInversions
+反演计算与实验获得的纯铜的载荷—位移曲线和压痕轮廓存在一定的误差,误差主要
+由两方面造成的:一方面，纳米压痕仪本身存在的测量误差，这主要有机架的柔度影响、
+压头几何形状的影响以及接触零点的影响,其中压头的几何形状对本次测量结果的影响最
+ Material31/图5.jpg
+图4Fefr-Mo台金(a的)和FetCr-Mo+Mn-Si合金(cH)的析出相分析
+Fig.4AnalysisoftheprecipitatedphaseinFeCr-Moalloy(ah}andFe-Cr-Mo-MnSialloy(cH
+ Material6/图4.jpg
+图5不同温度退火后台金的力学性能
+（al)抗拉强度;(b)冲击吸收能量
+Fig.5Mechanicalproperisofthcalloysannealcd
+at_diferentemmperatures
+（a}tensiestrengh;（b}impactabsorhedenergy
+ Material6/图5.jpg
+图5-10纯铜材料参数识别过程
+Fig.5-10CopperMaterialParameterIdentificationProcess
+ Material31/图5.jpg
+ Material31/223.jpg
+图5-11实验和反演分析获得的载荷位移—曲线图5-12实验和反演获得的压痕轮廓
+Fig.5-11LoadDisplacementVersusCurveObtainedfromFig.5-12IndentationProfileObtainedfrom
+ExperimentalandInversionAnalysisExperimentsandInversions
+反演计算与实验获得的纯铜的载荷—位移曲线和压痕轮廓存在一定的误差,误差主要
+由两方面造成的:一方面，纳米压痕仪本身存在的测量误差，这主要有机架的柔度影响、
+压头几何形状的影响以及接触零点的影响,其中压头的几何形状对本次测量结果的影响最
+ Material31/图5.jpg
+图5-10纯铜材料参数识别过程
+Fig.5-10CopperMaterialParameterIdentificationProcess
+ Material31/图5.jpg
+ Material31/223.jpg
+图5-11实验和反演分析获得的载荷位移—曲线图5-12实验和反演获得的压痕轮廓
+Fig.5-11LoadDisplacementVersusCurveObtainedfromFig.5-12IndentationProfileObtainedfrom
+ExperimentalandInversionAnalysisExperimentsandInversions
+反演计算与实验获得的纯铜的载荷—位移曲线和压痕轮廓存在一定的误差,误差主要
+由两方面造成的:一方面，纳米压痕仪本身存在的测量误差，这主要有机架的柔度影响、
+压头几何形状的影响以及接触零点的影响,其中压头的几何形状对本次测量结果的影响最
+ Material31/图5.jpg
+图5-10纯铜材料参数识别过程
+Fig.5-10CopperMaterialParameterIdentificationProcess
+ Material31/图5.jpg
+ Material31/223.jpg
+图5-11实验和反演分析获得的载荷位移—曲线图5-12实验和反演获得的压痕轮廓
+Fig.5-11LoadDisplacementVersusCurveObtainedfromFig.5-12IndentationProfileObtainedfrom
+ExperimentalandInversionAnalysisExperimentsandInversions
+反演计算与实验获得的纯铜的载荷—位移曲线和压痕轮廓存在一定的误差,误差主要
+由两方面造成的:一方面，纳米压痕仪本身存在的测量误差，这主要有机架的柔度影响、
+压头几何形状的影响以及接触零点的影响,其中压头的几何形状对本次测量结果的影响最
+ Material31/图5.jpg
+图5-10纯铜材料参数识别过程
+Fig.5-10CopperMaterialParameterIdentificationProcess
+ Material31/图5-10.jpg
+ Material31/223.jpg
+图5-11实验和反演分析获得的载荷位移—曲线图5-12实验和反演获得的压痕轮廓
+Fig.5-11LoadDisplacementVersusCurveObtainedfromFig.5-12IndentationProfileObtainedfrom
+ExperimentalandInversionAnalysisExperimentsandInversions
+反演计算与实验获得的纯铜的载荷—位移曲线和压痕轮廓存在一定的误差,误差主要
+由两方面造成的:一方面，纳米压痕仪本身存在的测量误差，这主要有机架的柔度影响、
+压头几何形状的影响以及接触零点的影响,其中压头的几何形状对本次测量结果的影响最
+ Material31/图5-11.jpg

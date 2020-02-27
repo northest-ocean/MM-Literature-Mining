@@ -27,6 +27,7 @@ def remove_adhesion_area(seg_image, erode_iter=10, kernel=None):
     origin = cv2.dilate(eroded,kernel)
     for i in range(erode_iter):
         origin = cv2.dilate(origin,kernel)
+    cv2.imwrite("x.png", origin)
     return origin
 
 
@@ -124,7 +125,7 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
                         i = 1
                         start = 1
                 title = title.replace("<space>", " ")
-                if title[i] not in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", " ","]", ")"):
+                if title[i] not in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", " ","]", ")","-"):
                     # Normally we won"t see Table1.100
                     if i - start > 5:
                         i = start + 4
@@ -209,7 +210,7 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
             raise RuntimeError("NO segmentation found!")
         for line_seg in line_segs:
             line_seg_areas.append(scan_area[line_seg[0]:line_seg[1]])
-        cv2.imwrite('x.png', scan_area[line_segs[0][0]:line_segs[-1][-1]])
+        # cv2.imwrite('x.png', scan_area[line_segs[0][0]:line_segs[-1][-1]])
         title = extract_text_from_image(scan_area[line_segs[0][0]:line_segs[-1][-1]], mode="S")
         if title[0] not in "图表":
             print("\033[1;31mFirst Dection Failed! Reconstruting the detection area...\033[0m")

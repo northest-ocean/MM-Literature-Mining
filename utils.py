@@ -105,7 +105,7 @@ def line_segmentation(img, flag=1, tag="figure"):
         for i in range(img.shape[1]):
             if img[row][i][0] >= 230 and img[row][i][1] >= 230 and img[row][i][2] >= 230:
                 pass
-            elif img[row][i][0] <= 130 or img[row][i][1] <= 130 or img[row][i][2] <= 130:
+            elif img[row][i][0] <= 50 or img[row][i][1] <= 50 or img[row][i][2] <= 50:
                 return False
             else:
                 pixel_sum += 1
