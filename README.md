@@ -5,7 +5,8 @@
 ## Fundamentals
 1. Using ResNet50_Segnet to detect Image and Table area in a PDF file, especially for scientific papers
 2. Using CNOCR which is based on CRNN to extract tags and related information. (More NLP work is required to further this project)
-3. Self-developed algorithm to deal with the adhesion areas (Developing ...)
+3. Self-developed algorithm to deal with the adhesion areas
+4. Failure area recontruction and second extract
 
 ## Getting Started
 
