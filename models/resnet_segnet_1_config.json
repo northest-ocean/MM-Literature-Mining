@@ -1,1 +1,0 @@
-{"model_class": "resnet50_segnet", "n_classes": 3, "input_height": 960, "input_width": 704, "output_height": 480, "output_width": 352}
