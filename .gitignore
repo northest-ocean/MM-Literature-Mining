@@ -1,2 +1,14 @@
 venv
 .vscode
+mm_core
+main.py
+setup_ai.py
+setup.py
+Dataset
+dist
+build
+mm_ai_server/.models
+mm_core.egg-info
+mm_fe_server
+mm_training_server
+r
