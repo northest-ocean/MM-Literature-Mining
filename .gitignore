@@ -12,3 +12,9 @@ mm_core.egg-info
 mm_fe_server
 mm_training_server
 r
+__pycache__
+.cached_masks
+.models
+.images
+images
+images_scaled

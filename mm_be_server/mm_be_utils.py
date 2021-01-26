@@ -1,10 +1,27 @@
 
 import cv2
+import base64
+import asyncio
 
 from mm_core.mm_core_utils import check_required_folder_file_for_save, get_all_seg_areas, remove_adhesion_area
 from mm_core.mm_core_logger import logger
 from mm_ai_sever.mm_ai_ocr import extract_text_from_image
-def save(title=None, block=None, file_name=None, tag=None, ori_image):
+
+
+async def async_send_ocr_request(code):
+    await send_request(code)
+
+
+def get_ocr_result_from_ai_server(image_list):
+    loop = asyncio.get_event_loop()
+    encoded_list = []
+    for image in image_list:
+        encoded_list.append(image_to_base64(image))
+    tasks = [async_send_ocr_request(code) for code in encoded_list]
+
+    
+
+def save(title=None, block=None, file_name=None, tag=None, ori_image=None):
         """save detected area and save log"""
         check_required_folder_file_for_save(file_name)
         # Tag should be determined, otherwise the model may not work properly.
@@ -125,10 +142,17 @@ def generate_result(seg_image, ori_image, erode_iter=10, kernel=None):
             raise RuntimeError("NO segmentation found!")
         for line_seg in line_segs:
             line_seg_areas.append(scan_area[line_seg[0]:line_seg[1]])
-        # cv2.imwrite('x.png', scan_area[line_segs[0][0]:line_segs[-1][-1]])
-        title = extract_text_from_image(scan_area[line_segs[0][0]:line_segs[-1][-1]])
+        # title = extract_text_from_image(scan_area[line_segs[0][0]:line_segs[-1][-1]])
+        title = get_ocr_result_from_ai_server(line_seg_areas)
+
         if title[0] not in "图表":
             logger.warn("First Dection Failed! Reconstruting the detection area...")
             new_area = reconstruct_area(line_segs, ori_image, block, tag, mode)
             title = extract_text_from_image(new_area)
         save(title, block, file_name, tag, ori_image)
+
+def image_to_base64(image):
+    return base64.b64encode(image)
+
+def base64_to_image(base64_code):
+    return base64.b64decode(base64_code)

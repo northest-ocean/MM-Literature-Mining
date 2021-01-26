@@ -12,23 +12,25 @@ app = Flask(__name__)
 
 CORS(app, supports_credentials=True)
 
-@app.route('/api/model/mask', methods=['POST'])
+@app.route('/api/ai/mask', methods=['POST'])
 def mask_request_handler():
     pass
 
-@app.route('/api/model/ocr', methods=['POST'])
+@app.route('/api/ai/ocr', methods=['POST'])
 def ocr_request_handler():
     if request.method == 'POST':
         data = request.get_data(as_text=False)
-        data_dict = json.loads(data)['data']
+        # data_dict = json.loads(data)
+        data_dict = demjson.decode(data)
         print(data_dict)
-        os.system(data_dict['shell'])
+        # print(data_dict)
+        # os.system(data_dict['shell'])
         response = dict()
         response['status'] = 200
-        try:
-            response['data'] = model_handler(data_dict)
-        except Exception as e:
-            response['status'] = 503
+        # try:
+        #     response['data'] = model_handler(data_dict)
+        # except Exception as e:
+        #     response['status'] = 503
         return response
 
 if __name__ == '__main__':

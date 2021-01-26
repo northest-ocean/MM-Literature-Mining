@@ -1,5 +1,7 @@
 import os
 import sys
+import traceback
+
 from keras_segmentation.predict import predict_multiple, predict
 from mm_core.mm_core_logger import logger
 from mm_core.mm_core_utils import check_model_file
@@ -15,8 +17,9 @@ def get_single_segmentation(file_path):
                 inp=file_path,
                 out_fname="./.cached_masks/" + file_path.split("/")[-1]
             )
+            logger.info("Saving mask in {}".format("./.cached_masks/" + file_path.split("/")[-1]))
         except Exception as e:
-            logger.error("Cannot fetch mask from model, error reason: " + e.__str__())
+            logger.error("Cannot fetch mask from model, error reason: " + e.__str__() + traceback.format_exc())
             return -1
     else:
         logger.warn("Found cached mask for current data, using cached mask...")
