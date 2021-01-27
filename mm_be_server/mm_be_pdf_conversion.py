@@ -3,6 +3,7 @@ import cv2
 import os
 import asyncio
 import time
+import poppler
 
 from multiprocessing import Process, cpu_count
 
@@ -61,5 +62,13 @@ def scale_image(input_path, output_path, target_size):
         process.join()
 
 if __name__ == "__main__":
-    pdf2img("/home/SENSETIME/liumengyang/GT/Papers/2004.14723.pdf")
-    scale_image("./images", './images_scaled', (960, 704))
+    d = poppler.load("/home/SENSETIME/liumengyang/GT/Papers/2006.06877.pdf")
+    # d = poppler.load("/home/SENSETIME/liumengyang/GT/Material2.pdf")
+    for page_index in range(d.pages):
+        page = d.create_page(page_index)
+        # print(page.text_list())
+        for text_box in page.text_list():
+            print(text_box.text, text_box.bbox.as_tuple())
+            # pass
+    # pdf2img("/home/SENSETIME/liumengyang/GT/Papers/2006.06877.pdf")
+    # scale_image("./images", './images_scaled', (960, 704))
