@@ -32,10 +32,10 @@ def get_mask_for_image_dir(input_dir):
     check_env()
     assert os.path.isdir(input_dir), "Your directory path is not valid, cannot read file from it."
     get_segmentations(input_dir)
-    for path in os.listdir(input_dir):
-        if "jpg" in path:
-            seg_image =  "./.cached_masks/" + path
-            ori_image = input_dir + "/" + path
+    # for path in os.listdir(input_dir):
+    #     if "jpg" in path:
+    #         seg_image =  "./.cached_masks/" + path
+    #         ori_image = input_dir + "/" + path
     
 
 

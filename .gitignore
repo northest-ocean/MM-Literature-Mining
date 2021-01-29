@@ -18,3 +18,10 @@ __pycache__
 .images
 images
 images_scaled
+*.png
+*.jpg
+*.pdf
+*.cu
+Makefile
+*.tar.gz
+main
